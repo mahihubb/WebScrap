@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Price Tracker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Copperplate;
+            height: 100vh;
+            display: flex;
+            background: linear-gradient(120deg, #AF7AC5, #F8BBD0);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            position: relative;
+        }
+
+        .left {
+            width: 60%;
+            padding: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .right {
+            width: 40%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+
+        .image {
+            margin-top: 170px;
+        }
+
+        img {
+            height: 400px;
+            width: 400px;
+        }
+
+        .typewriter {
+            font-size: 90px;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            margin-top: 200px;
+            margin-left: 100px;
+            width: 0;
+        }
+
+        .underline {
+            width: 2px;
+            height: 6px;
+            background-color: white;
+            margin-left: 100px;
+            transition: width 0.5s ease;
+            opacity: 0;
+        }
+
+        .subtitle {
+            font-size: 30px;
+            margin-top: 20px;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin-left: 100px;
+        }
+
+        .button-container {
+            margin-top: 300px;
+            margin-left: 250px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .button-container button {
+            padding: 20px 40px;
+            background-color: white;
+            color: #2b262b;
+            border: none;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            background-color: white;
+        }
+
+        .image img {
+            height: 400px;
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .image img:hover {
+            transform: scale(0.9);
+        }
+
+        .square-overlap {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #F8BBD0;
+            top: 150px;
+            left: 70px;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .circle-overlap {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #AF7AC5;
+            border-radius: 50%;
+            top: 120px;
+            right: 80px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>  
+</head>
+
+<body>
+    <div class="square-overlap"></div>
+    <div class="container">
+        <div class="left">
+            <div class="typewriter" id="headline"></div>
+            <div class="underline" id="underline"></div>
+            <div class="subtitle" id="subtitle">Track prices, compare deals, and choose the best offer from <br>your
+                favorite websites!</div>
+
+            <div class="button-container" id="button-container" onclick="window.location.href='/start'">
+                <button>Start Now</button>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="image">
+                <div class="circle-overlap"></div>
+                <img src="{{ url_for('static', filename='images/home.jpeg') }}">
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const typewriterText = "Web Price Tracker...";
+        const typeWriterSpeed = 150;
+        let headlineIndex = 0;
+
+        const headlineElement = document.getElementById('headline');
+        const underlineElement = document.getElementById('underline');
+        const subtitleElement = document.getElementById('subtitle');
+        const buttonContainer = document.getElementById('button-container');
+
+
+        function typeHeadline() {
+            if (headlineIndex < typewriterText.length) {
+                headlineElement.style.width = headlineIndex + 1 + 'ch';
+                headlineElement.innerHTML += typewriterText.charAt(headlineIndex);
+                headlineIndex++;
+                setTimeout(typeHeadline, typeWriterSpeed);
+            } else {
+                setTimeout(showUnderline, 500);
+            }
+        }
+
+
+        function showUnderline() {
+            underlineElement.style.opacity = 1;
+            underlineElement.style.width = '600px';
+            setTimeout(() => { subtitleElement.style.opacity = 1; }, 500);
+            setTimeout(showButton, 1500);
+        }
+
+
+        function showButton() {
+            buttonContainer.style.display = 'block';
+        }
+
+
+        window.onload = function () {
+            typeHeadline();
+        };
+    </script>
+
+</body>
+
+</html>

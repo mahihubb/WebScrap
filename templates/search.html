@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Product</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #AF7AC5, #F8BBD0);
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            height: 80%;
+            position: relative;
+        }
+
+
+        .divider {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.5);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        .left-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 450px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            margin: 15px 0;
+            font-size: 24px;
+            color: #1d1b1b;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #1f1d1d;
+        }
+
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            padding: 20px;
+        }
+
+        .right-section h1 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .underline {
+            width: 0;
+            height: 4px;
+            background-color: #FFFFFF;
+            transition: width 0.5s ease;
+            margin-bottom: 90px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            width: 300px;
+            background-color: white;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input[type="text"] {
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 16px;
+            flex: 1;
+            border-radius: 25px;
+        }
+
+        .search-box button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .search-box button i {
+            font-size: 24px;
+        }
+
+        .search-box button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #AF7AC5;
+        }
+
+        .square-overlap {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #F8BBD0;
+            top: 130px;
+            left: 70px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .circle1-overlap {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #AF7AC5;
+            border-radius: 50%;
+            top: 90px;
+            right: 60px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .circle2-overlap {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #AF7AC5;
+            border-radius: 50%;
+            top: 100px;
+            right: 90px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="square-overlap"></div>
+
+    <div class="container">
+        <div class="left-section">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/search.jpeg') }}" alt="Product Image">
+                <h2>Web Price Tracker</h2>
+                <p>Compare prices from Amazon and Flipkart using web scraping.</p>
+                <p>Find the best deals instantly and track price fluctuations effortlessly.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="right-section">
+            <div class="circle1-overlap"></div>
+            <div class="circle2-overlap"></div>
+            <h1>Enter the product you want to search</h1>
+            <div class="underline" id="underline"></div>
+
+            <form action="/search" method="post" class="search-box">
+                <input type="text" name="product_name" placeholder="Product Name" required>
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19a9 9 0 100-18 9 9 0 000 18zm7-3l5 5" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        // Function to show underline on page load
+        window.onload = function () {
+            const underline = document.getElementById('underline');
+            underline.style.width = '300px'; // Set to desired width
+        };
+    </script>
+</body>
+
+</html>
